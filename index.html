@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parallax GSAP</title>
+  <style>
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      font-family: Arial, sans-serif;
+    }
+
+    .section {
+      height: 100vh;
+      background-color: #d6d6d6;
+    }
+
+    .section:nth-child(2) {
+      background-color: #b4b4b4;
+    }
+
+    .section:nth-child(3) {
+      background-color: #d6d6d6;
+    }
+
+    .square,
+    .circle,
+    .triangle,
+    .track,
+    .lightning {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100px;
+      height: 100px;
+    }
+
+    .track {
+      width: 130%;
+      background: url(./дорога.png) no-repeat center 47% / cover;
+      margin-top: 70px;
+    }
+
+    .square {
+      background-color: #3498db;
+      background: url(./pngwing.com.png) no-repeat center bottom / cover;
+      z-index: 5;
+      width: 180px;
+      transform: scaleX(-1);
+    }
+
+    .circle {
+      background-color: #e74c3c;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .triangle {
+      background: url(./pngegg.png) no-repeat center bottom / cover;
+      z-index: 2;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="section section1"></div>
+  <div class="section section2"></div>
+  <div class="section section3"></div>
+
+  <div class="square"></div>
+  <div class="circle"></div>
+  <div class="triangle"></div>
+  <div class="track"></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <script>
+    // Инициализация анимаций с помощью ScrollTrigger
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Анимация для квадратов
+    gsap.fromTo(".square", { x: -600 }, {
+      x: 200,
+      scrollTrigger: {
+        trigger: ".section2",
+        start: "top 80%",
+        end: "bottom 20%",
+        scrub: true,
+      }
+    });
+
+    // Анимация для кругов
+    gsap.fromTo(".circle", { y: 600 }, {
+      y: -200,
+      scrollTrigger: {
+        trigger: ".section1",
+        start: "top 80%",
+        end: "bottom 20%",
+        scrub: true,
+      }
+    });
+
+    // Анимация для треугольников
+    gsap.fromTo(".triangle", { rotation: 0, x: 0, y: 0}, {
+      rotation: 360,
+      x: 300,
+      y: -300,
+      scrollTrigger: {
+        trigger: ".section2",
+        start: "top 32%",
+        end: "bottom 20%",
+        scrub: true,
+      }
+    });
+  </script>
+
+</body>
+
+</html>
